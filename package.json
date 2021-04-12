@@ -12,6 +12,9 @@
     "api",
     "heroku"
   ],
+  "engines": {
+    "node": "15.5.0"
+  },
   "author": "Dorian Peyrache",
   "license": "ISC",
   "dependencies": {
