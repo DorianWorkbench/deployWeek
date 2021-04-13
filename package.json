@@ -35,7 +35,9 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.1",
+    "@types/ejs": "^3.0.6",
     "@types/express-session": "^1.17.3",
+    "@types/nodemailer": "^6.4.1",
     "@types/passport": "^1.0.6",
     "@types/passport-local": "^1.0.33"
   }

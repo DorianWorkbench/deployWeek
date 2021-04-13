@@ -1,6 +1,7 @@
 import {DTOaddUser, DTOfetchUser} from "../services/userService";
 import {userScheme} from "../bdd/schema/userSchema";
 import mongoose from "mongoose";
+import { MailUtils } from "../utils/mailer";
 
 export class UserRepository{
     
@@ -15,9 +16,10 @@ export class UserRepository{
         const result = await user.save().catch((err:mongoose.Error)=>{
             return [{status:500}, {success:false, err:err}];
         });
-        if(!user){
+        if(!result){
             return [{status:400}, {success:false, err:"create-user-error"}];
         }
+
         return [{status:201}, {success:true, result}];
     }
     async fetchAllUser(){

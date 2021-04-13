@@ -17,7 +17,6 @@ export function UserRouteFactory(userService:UserService){
         userController.getOneUser(req, res);
     })
     router.post('/login', passport.authenticate('local'), function(req,res){
-        console.log("test route")
         res.status(200).json({success:true, result:req.user});
     })
     return router;

@@ -20,12 +20,9 @@ export default passport.use('local', new LocalStrategy({
     async function(username, password, done){
         const user = await userScheme.findOne({username:username})
             .catch((err:mongoose.Error)=>{
-                console.log(err);
-                console.log("global-error");
                 done(err);
             });
         if(!user){
-            console.log(username);
             return done(null, false);
         }
         let validation = await compareHash(password.toString(), user.password);
