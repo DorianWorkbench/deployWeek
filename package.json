@@ -4,7 +4,9 @@
   "description": "deploy in heroku",
   "main": "app.ts",
   "scripts": {
-    "build": "tsc && cp -r ./src/templateMail ./build/src"
+    "build": "tsc && cp -r ./src/templateMail ./build/src",
+    "start": "node ./build/app.js",
+    "serve":"nodemon app.ts"
   },
   "keywords": [
     "api",
