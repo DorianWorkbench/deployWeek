@@ -11,7 +11,7 @@ export class UserRepository{
 
         user.username = dtoAddUser.username;
         user.password = dtoAddUser.password;
-        
+
         const result = await user.save().catch((err:mongoose.Error)=>{
             return [{status:500}, {success:false, err:err}];
         });

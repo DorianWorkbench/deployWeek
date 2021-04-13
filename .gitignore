@@ -1,3 +1,4 @@
 node_modules
+src/bdd/connect.ts
 .env
 build
