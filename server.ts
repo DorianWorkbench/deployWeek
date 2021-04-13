@@ -1,6 +1,6 @@
 import express from "express";
 import expressSession from "express-session";
-
+import path from "path";
 import passport from "passport";
 import {connect} from "./src/bdd/connect";
 
@@ -9,7 +9,7 @@ require('dotenv').config();
 export const app = express();
 
 export async function serverRun(){
-    await connect(); 
+    await connect();
     app.use(expressSession({
          secret: process.env.SECRET!,
          resave:true,

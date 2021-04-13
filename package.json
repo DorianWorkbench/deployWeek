@@ -4,10 +4,7 @@
   "description": "deploy in heroku",
   "main": "app.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "node ./build/app.js",
-    "serve": "nodemon app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && cp ./src/templateMail ./build/src"
   },
   "keywords": [
     "api",
