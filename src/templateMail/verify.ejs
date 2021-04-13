@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        .banner{
+            display: block;
+            text-align: center;
+            width: 100%;
+            background-color: #1C7CFF;
+            height: 80px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Veuillez confirmer votre compte</h1>
+    <div class="banner">
+        <p style="margin: auto; color:white; font-size:20px;">Veuillez confirmer votre compte :</p>
+    </div>
+    <p>
+        Pour activer votre compte, veuillez cliquer sur le bouton :
+    </p>
+    <a href="<%= activeLink %>"><button>Activer</button></a>
 </body>
 </html>

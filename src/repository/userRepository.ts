@@ -1,17 +1,15 @@
-import {DTOaddUser, DTOfetchUser} from "../services/userService";
+import {DTOactiveUser, DTOaddUser, DTOfetchUser} from "../services/userService";
 import {userScheme} from "../bdd/schema/userSchema";
 import mongoose from "mongoose";
-import { MailUtils } from "../utils/mailer";
 
 export class UserRepository{
-    
-    
     constructor(){}
     async insertUser(dtoAddUser:DTOaddUser){
         let user = new userScheme();
 
         user.username = dtoAddUser.username;
         user.password = dtoAddUser.password;
+        user.token = dtoAddUser.token;
 
         const result = await user.save().catch((err:mongoose.Error)=>{
             return [{status:500}, {success:false, err:err}];
@@ -37,5 +35,15 @@ export class UserRepository{
                 return [{status:500}, {success:false, err:"global-error"}];
             });
         return [{status:200}, {success:true, result:result}];
+    }
+    async activeUser(dtoActiveUser:DTOactiveUser){
+        const result = await userScheme.findOneAndUpdate({token:dtoActiveUser.uuid}, {active:true}, {new:true, useFindAndModify:false })
+            .catch((err:mongoose.Error)=>{
+                return [{status:500}, {success:false, err:"global-error"}];
+            });
+        if(!result){
+            return [{status:404},{success:false, err:"user-relative-token-not-found"}];
+        }
+        return [{status:204}, {success:true, result:result}];
     }
 }

@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import { UserService, DTOaddUser, DTOfetchUser } from "../services/userService";
+import { UserService, DTOaddUser, DTOfetchUser, DTOactiveUser } from "../services/userService";
 
 export class UserController {
     
@@ -22,6 +22,13 @@ export class UserController {
             uuid:req.params.id
         };
         const [status, data] = await this.userService.getUserById(dtoFetchUser);
+        return res.status(status.status!).json(data);
+    }
+    async activeUser(req:Request, res:Response){
+        let dtoActiveUser:DTOactiveUser={
+            uuid:req.params.id
+        }
+        const [status, data] = await this.userService.activeUser(dtoActiveUser);
         return res.status(status.status!).json(data);
     }
 }

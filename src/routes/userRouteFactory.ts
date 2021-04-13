@@ -19,5 +19,8 @@ export function UserRouteFactory(userService:UserService){
     router.post('/login', passport.authenticate('local'), function(req,res){
         res.status(200).json({success:true, result:req.user});
     })
+    router.get('/active/:id', (req:Request, res:Response)=>{
+        userController.activeUser(req,res);
+    })
     return router;
 }
