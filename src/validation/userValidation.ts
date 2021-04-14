@@ -4,10 +4,8 @@ import Joi from "joi";
 
 export class UserValidation{
     constructor(private userRepository:UserRepository){}
-    
-    async validUser(req:Request, res:Response, next:NextFunction){
-        console.log("validUser");
 
+    async validAddUser(req:Request, res:Response, next:NextFunction){
         const schemaUser = Joi.object({
             username:Joi.string()
                 .trim()
