@@ -39,13 +39,16 @@ export class UserValidation{
     }
 
     async validAddUser(req:Request, res:Response, next:NextFunction){
+        
+        if(!req.body.username){return res.status(400).json({success:false, err:"username-not-set"})}
+        else if(!req.body.password){return res.status(400).json({success:false, err:"password-not-set"})}
+
         const schemaUser = Joi.object({
             username:Joi.string()
                 .trim()
                 .email()
                 .lowercase()
                 .min(3)
-                .required()
                 .messages({
                     'string.email': 'email-not-valid',
                     'string.trim': 'email-contain-space',
@@ -55,7 +58,6 @@ export class UserValidation{
                     'string.required':'email-is-required'
                 }),
             password:Joi.string()
-                .required()
                 .alphanum()
                 .min(5)
                 .messages({
@@ -71,7 +73,7 @@ export class UserValidation{
             return res.status(400).json({success:false, err:result.error.details[0].message});
         }
         let dtoFetchUserByEmail:DTOfetchUserByEmail = {
-            email:req.body.body.email
+            email:req.body.username
         }
         const [status, data] = await this.userRepository.fetchUserByEmail(dtoFetchUserByEmail);
         
