@@ -19,8 +19,10 @@ export function UserRouteFactory(userService:UserService, userValidation:UserVal
     router.get('/:id', (req:Request, res:Response)=>{
         userController.getOneUser(req, res);
     })
-    router.post('/login', passport.authenticate('local'), function(req,res){
-        res.status(200).json({success:true, result:req.user});
+    router.post('/login',(req:Request, res:Response, next:NextFunction)=>{userValidation.validLoginUser(req, res, next)}, 
+        passport.authenticate('local'), 
+        function(req,res){
+            res.status(200).json({success:true, result:req.user});
     })
     router.get('/active/:id', (req:Request, res:Response)=>{
         userController.activeUser(req,res);
