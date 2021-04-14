@@ -1,6 +1,5 @@
-import { PizzaService } from "../services/pizzaService";
+import { PizzaService, DTOaddPizza, DTOgetOnePizza } from "../services/pizzaService";
 import {Request, Response} from "express";
-import {DTOaddPizza} from "../services/pizzaService";
 
 export class PizzaController{
     constructor(private pizzaService:PizzaService){}
@@ -12,6 +11,14 @@ export class PizzaController{
             pizzaName:req.body.pizzaName
         }
         const [status, data] = await this.pizzaService.addingPizza(dtoAddPizza);
+
+        return res.status(status.status!).json(data);
+    }
+    async fetchOnePizz(req:Request, res:Response){
+        let dtoGetPizz:DTOgetOnePizza = {
+            id:req.params.id
+        }
+        const [status, data] = await this.pizzaService.getOnePizza(dtoGetPizz);
 
         return res.status(status.status!).json(data);
     }

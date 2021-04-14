@@ -9,5 +9,8 @@ export function PizzaRouteFactory(pizzaService:PizzaService){
     router.post('/', (req:Request, res:Response)=>{
         pizzaController.addingPizza(req,res);
     })
+    router.get('/:id', (req:Request, res:Response)=>{
+        pizzaController.fetchOnePizz(req,res);
+    })
     return router;
 }
