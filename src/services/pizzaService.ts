@@ -11,7 +11,6 @@ export type DTOgetOnePizza={
 }
 
 export class PizzaService{
-    
     constructor(private pizzaRepo:PizzaRepository){}
     
     async addingPizza(dtoAddPizza:DTOaddPizza){
@@ -21,6 +20,10 @@ export class PizzaService{
 
     async getOnePizza(dtoGetPizza:DTOgetOnePizza){
         let [status, data] = await this.pizzaRepo.getPizza(dtoGetPizza);
-        return [{status:status.status, data}];
+        return [{status:status.status}, data];
+    }
+    async getAllPizza(){
+        let [status, data] = await this.pizzaRepo.getPizzas();
+        return [{status:status.status}, data];
     }
 }

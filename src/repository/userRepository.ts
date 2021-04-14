@@ -20,6 +20,7 @@ export class UserRepository{
 
         return [{status:201}, {success:true, result}];
     }
+
     async fetchAllUser(){
         const result = await userScheme.find().catch((err:mongoose.Error)=>{
             return [{status:500}, {success:false, err:"global-error"}];
@@ -29,6 +30,7 @@ export class UserRepository{
         }
         return  [{status:200},{success:true, result:result}];
     }
+
     async fetchUserById(dtoFetchUser:DTOfetchUser){
         const result = await userScheme.findOne({_id:dtoFetchUser.uuid})
             .catch((err:mongoose.Error)=>{
@@ -36,6 +38,7 @@ export class UserRepository{
             });
         return [{status:200}, {success:true, result:result}];
     }
+    
     async activeUser(dtoActiveUser:DTOactiveUser){
         const result = await userScheme.findOneAndUpdate({token:dtoActiveUser.uuid}, {active:true}, {new:true, useFindAndModify:false })
             .catch((err:mongoose.Error)=>{

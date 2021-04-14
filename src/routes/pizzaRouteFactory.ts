@@ -12,5 +12,8 @@ export function PizzaRouteFactory(pizzaService:PizzaService){
     router.get('/:id', (req:Request, res:Response)=>{
         pizzaController.fetchOnePizz(req,res);
     })
+    router.get('/', (req:Request, res:Response)=>{
+        pizzaController.fetchAllUser(req,res);
+    })
     return router;
 }
