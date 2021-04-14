@@ -3,6 +3,7 @@ import expressSession from "express-session";
 import path from "path";
 import passport from "passport";
 import {connect} from "./src/bdd/connect";
+import cors from "cors";
 
 require('dotenv').config();
 
@@ -10,6 +11,9 @@ export const app = express();
 
 export async function serverRun(){
     await connect();
+    app.use(cors({
+        origin:"*"
+    }))
     app.use(expressSession({
          secret: process.env.SECRET!,
          resave:true,
