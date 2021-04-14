@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && cp -r ./src/templateMail ./build/src",
     "start": "node ./build/app.js",
-    "serve":"nodemon app.ts"
+    "serve": "nodemon app.ts"
   },
   "keywords": [
     "api",
@@ -24,6 +24,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "joi": "^17.4.0",
     "mongoose": "^5.12.3",
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",

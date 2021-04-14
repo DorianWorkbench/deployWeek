@@ -1,15 +1,18 @@
-import Router, {Request, Response}  from "express";
+import Router, {NextFunction, Request, Response}  from "express";
 import passport from "../utils/passport";
 import {UserController} from "../controller/userController";
 import { UserService } from "../services/userService";
+import { UserValidation } from "../validation/userValidation";
 
-export function UserRouteFactory(userService:UserService){
+export function UserRouteFactory(userService:UserService, userValidation:UserValidation){
     const router = Router();
     const userController = new UserController(userService);
 
-    router.post('/', (req:Request, res:Response)=>{
-        userController.addUser(req,res)
-    });
+    router.post('/', (req:Request, res:Response, next:NextFunction)=>{
+        userValidation.validUser(req, res, next)},
+        (req:Request, res:Response)=>{
+            userController.addUser(req,res)
+        });
     router.get('/', (req:Request, res:Response)=>{
         userController.getAllUser(req, res);
     })
