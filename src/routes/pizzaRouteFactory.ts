@@ -1,14 +1,17 @@
 import { PizzaService } from "../services/pizzaService";
-import Router, {Request, Response} from "express";
+import Router, {Request, Response, NextFunction} from "express";
 import {PizzaController} from "../controller/pizzaController";
+import { PizzaValidation } from "../validation/pizzaValidation";
 
-export function PizzaRouteFactory(pizzaService:PizzaService){
+export function PizzaRouteFactory(pizzaService:PizzaService, pizzaValidation:PizzaValidation){
     let router = Router();
     let pizzaController:PizzaController = new PizzaController(pizzaService);
     
-    router.post('/', (req:Request, res:Response)=>{
-        pizzaController.addingPizza(req,res);
-    })
+    router.post('/', (req:Request, res:Response, next:NextFunction)=>{
+        pizzaValidation.validAddPizz(req,res,next)},
+        (req:Request, res:Response)=>{
+            pizzaController.addingPizza(req,res);}
+    )
     router.get('/:id', (req:Request, res:Response)=>{
         pizzaController.fetchOnePizz(req,res);
     })

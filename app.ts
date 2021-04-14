@@ -8,10 +8,11 @@ import {PizzaService} from "./src/services/pizzaService";
 import {PizzaRouteFactory} from "./src/routes/pizzaRouteFactory";
 import { PizzaRepository } from "./src/repository/pizzaRepository";
 import { UserValidation } from "./src/validation/userValidation";
+import { PizzaValidation } from "./src/validation/pizzaValidation";
 
 async function init(){
     await serverRun();
     app.use('/user', UserRouteFactory(new UserService(new UserRepository(), new MailUtils()), new UserValidation(new UserRepository())));
-    app.use('/pizza', PizzaRouteFactory(new PizzaService(new PizzaRepository())));
+    app.use('/pizza', PizzaRouteFactory(new PizzaService(new PizzaRepository()), new PizzaValidation(new PizzaRepository())));
 }
 init();

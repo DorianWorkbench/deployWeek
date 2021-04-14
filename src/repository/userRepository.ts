@@ -1,4 +1,4 @@
-import {DTOactiveUser, DTOaddUser, DTOfetchUser} from "../services/userService";
+import {DTOactiveUser, DTOaddUser, DTOfetchUser, DTOfetchUserByEmail} from "../services/userService";
 import {userScheme} from "../bdd/schema/userSchema";
 import mongoose from "mongoose";
 
@@ -38,7 +38,16 @@ export class UserRepository{
             });
         return [{status:200}, {success:true, result:result}];
     }
-    
+    async fetchUserByEmail(dtoFetchUserByEmail:DTOfetchUserByEmail){
+        const result = await userScheme.findOne({email:dtoFetchUserByEmail.email})
+            .catch((err:mongoose.Error)=>{
+                return [{status:500}, {success:false, err:"global-error"}];
+            });
+        if(!result){
+            return [{status:404}, {success:false, err:"user-not-found"}];
+        }
+        return [{status:200}, {success:true, result:result}];
+    }
     async activeUser(dtoActiveUser:DTOactiveUser){
         const result = await userScheme.findOneAndUpdate({token:dtoActiveUser.uuid}, {active:true}, {new:true, useFindAndModify:false })
             .catch((err:mongoose.Error)=>{

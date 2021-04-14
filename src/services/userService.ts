@@ -17,6 +17,10 @@ export type DTOfetchUser = {
 export type DTOactiveUser={
     uuid:string;
 }
+
+export type DTOfetchUserByEmail={
+    email:string;
+}
 export class UserService{
     
     

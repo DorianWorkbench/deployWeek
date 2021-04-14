@@ -1,11 +1,12 @@
 import { UserRepository } from "../repository/userRepository";
+import {DTOfetchUserByEmail} from "../services/userService";
 import {Request, Response, NextFunction} from "express"
 import Joi from "joi";
 
 export class UserValidation{
     constructor(private userRepository:UserRepository){}
 
-    async validLoginUser(req:Request, res:Response, next:NextFunction){
+    validLoginUser(req:Request, res:Response, next:NextFunction){
         
         if(!req.body.username){return res.status(400).json({success:false, err:"username-not-set"});}
         else if(!req.body.password){return res.status(400).json({success:false, err:"password-not-set"});}
@@ -69,10 +70,19 @@ export class UserValidation{
         if(result.error){
             return res.status(400).json({success:false, err:result.error.details[0].message});
         }
+        let dtoFetchUserByEmail:DTOfetchUserByEmail = {
+            email:req.body.body.email
+        }
+        const [status, data] = await this.userRepository.fetchUserByEmail(dtoFetchUserByEmail);
+        
+        if(status.status === 200){
+            return res.status(400).json({success:false, err:"user-already-exist"});
+        }
+
         return next();
     }
-    
-    async validActiveUser(req:Request, res:Response, next:NextFunction){
+
+    validActiveUser(req:Request, res:Response, next:NextFunction){
         if(!req.params.id){
             return res.status(400).json({success:false, err:"id-not-set"});
         }

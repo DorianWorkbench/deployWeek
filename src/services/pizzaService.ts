@@ -21,6 +21,10 @@ export type DTOupdatePizza={
     pizzaName:string;
 }
 
+export type DTOgetPizzaByName={
+    pizzaName:string;
+}
+
 export class PizzaService{
     
     constructor(private pizzaRepo:PizzaRepository){}
