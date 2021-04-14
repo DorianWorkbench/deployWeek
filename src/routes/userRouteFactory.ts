@@ -21,11 +21,13 @@ export function UserRouteFactory(userService:UserService, userValidation:UserVal
     })
     router.post('/login',(req:Request, res:Response, next:NextFunction)=>{userValidation.validLoginUser(req, res, next)}, 
         passport.authenticate('local'), 
-        function(req,res){
+        (req:Request,res:Response)=>{
             res.status(200).json({success:true, result:req.user});
     })
-    router.get('/active/:id', (req:Request, res:Response)=>{
-        userController.activeUser(req,res);
-    })
+    router.get('/active/:id', (req:Request, res:Response, next:NextFunction)=>{
+        userValidation.validActiveUser(req, res, next)}, 
+        (req:Request, res:Response)=>{
+            userController.activeUser(req,res);}
+    );
     return router;
 }

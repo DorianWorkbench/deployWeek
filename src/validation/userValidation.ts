@@ -71,4 +71,11 @@ export class UserValidation{
         }
         return next();
     }
+    
+    async validActiveUser(req:Request, res:Response, next:NextFunction){
+        if(!req.params.id){
+            return res.status(400).json({success:false, err:"id-not-set"});
+        }
+        return next();
+    }
 }
