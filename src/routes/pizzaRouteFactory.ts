@@ -13,7 +13,11 @@ export function PizzaRouteFactory(pizzaService:PizzaService){
         pizzaController.fetchOnePizz(req,res);
     })
     router.get('/', (req:Request, res:Response)=>{
-        pizzaController.fetchAllUser(req,res);
+        pizzaController.fetchAllPizza(req,res);
     })
+    router.delete('/:id', (req:Request, res:Response)=>{
+        pizzaController.deletePizza(req,res);
+    })
+    
     return router;
 }
