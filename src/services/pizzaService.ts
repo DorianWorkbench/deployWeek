@@ -14,6 +14,13 @@ export type DTOdeleteOnePizza={
     id:string
 }
 
+export type DTOupdatePizza={
+    id:string;
+    cost:number;
+    description:string;
+    pizzaName:string;
+}
+
 export class PizzaService{
     
     constructor(private pizzaRepo:PizzaRepository){}
@@ -35,6 +42,10 @@ export class PizzaService{
     
     async supressPizza(dtoDeletePizza:DTOdeleteOnePizza){
         let [status, data] = await this.pizzaRepo.deleteOnePizza(dtoDeletePizza);
+        return [{status:status.status}, data];
+    }
+    async updateOnePizza(dtoUpdatePizza: DTOupdatePizza){
+        let [status, data] = await this.pizzaRepo.updatePizz(dtoUpdatePizza);
         return [{status:status.status}, data];
     }
 }

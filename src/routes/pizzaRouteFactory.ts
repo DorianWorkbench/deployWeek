@@ -19,5 +19,9 @@ export function PizzaRouteFactory(pizzaService:PizzaService){
         pizzaController.deletePizza(req,res);
     })
     
+    router.put('/:id', (req:Request, res:Response)=>{
+        pizzaController.updatePizza(req,res);
+    })
+    
     return router;
 }

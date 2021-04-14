@@ -1,4 +1,4 @@
-import { PizzaService, DTOaddPizza, DTOgetOnePizza, DTOdeleteOnePizza } from "../services/pizzaService";
+import { PizzaService, DTOaddPizza, DTOgetOnePizza, DTOdeleteOnePizza, DTOupdatePizza } from "../services/pizzaService";
 import {Request, Response} from "express";
 
 export class PizzaController{
@@ -33,6 +33,17 @@ export class PizzaController{
             id:req.params.id
         }
         const [status, data] = await this.pizzaService.supressPizza(dtoDeleteOnepizza);
+        return res.status(status.status!).json(data);
+    }
+
+    async updatePizza(req: Request, res: Response) {
+        let dtoUpdatePizza:DTOupdatePizza={
+            id:req.params.id,
+            pizzaName:req.body.pizzaName,
+            cost:req.body.cost,
+            description:req.body.description
+        }
+        const [status, data] = await this.pizzaService.updateOnePizza(dtoUpdatePizza);
         return res.status(status.status!).json(data);
     }
 }
