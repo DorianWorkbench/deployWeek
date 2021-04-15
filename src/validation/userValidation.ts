@@ -8,26 +8,19 @@ export class UserValidation{
 
     validLoginUser(req:Request, res:Response, next:NextFunction){
         
-        if(!req.body.username){return res.status(400).json({success:false, err:"username-not-set"});}
+        if(!req.body.username){return res.status(400).json({success:false, err:"email-not-set"});}
         else if(!req.body.password){return res.status(400).json({success:false, err:"password-not-set"});}
 
         const schemaLoginUser = Joi.object({
             username:Joi.string()
-                .trim()
                 .email()
                 .lowercase()
                 .min(3)
                 .messages({
-                    'string.trim':'email-contain-space',
                     'string.email': 'email-not-valid',
-                    'string.empty': 'email-empty',
                     'string.min': 'email-min-not-reach',
                 }),
             password:Joi.string()
-                .empty()
-                .messages({
-                    'string.empty':'password-empty',
-                })
         });
         
         let result = schemaLoginUser.validate(req.body);
@@ -40,33 +33,24 @@ export class UserValidation{
 
     async validAddUser(req:Request, res:Response, next:NextFunction){
         
-        if(!req.body.username){return res.status(400).json({success:false, err:"username-not-set"})}
+        if(!req.body.username){return res.status(400).json({success:false, err:"email-not-set"})}
         else if(!req.body.password){return res.status(400).json({success:false, err:"password-not-set"})}
-
+        
+        req.body.username.trim();
+        req.body.username.toLowerCase();
+        
         const schemaUser = Joi.object({
             username:Joi.string()
-                .trim()
                 .email()
-                .lowercase()
-                .min(3)
                 .messages({
                     'string.email': 'email-not-valid',
-                    'string.trim': 'email-contain-space',
-                    'string.empty':'email-empty',
-                    'string.min':'email-min-not-reach',
-                    'string.lowercase':'email-not-lowercase',
-                    'string.required':'email-is-required'
                 }),
             password:Joi.string()
-                .alphanum()
                 .min(5)
                 .messages({
-                    'string.required':'password-not-set',
                     'string.min':'password-min-not-reach',
-                    'string.alphanum':'bad-typo-password'
                 })
         });
-
         let result = schemaUser.validate(req.body);
         
         if(result.error){

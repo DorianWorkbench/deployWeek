@@ -22,9 +22,6 @@ export class PizzaValidation{
         return next();
     }
     async validDeletePizz(req:Request, res:Response, next:NextFunction){
-        if(!req.params.id){
-            return res.status(400).json({success:false, err:"id-not-set"});
-        }
         let dtoGetPizza:DTOgetOnePizza={
             id:req.params.id
         }
