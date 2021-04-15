@@ -9,6 +9,15 @@
     "serve": "nodemon app.ts",
     "test": "jest --testTimeout=10000"
   },
+  "storage": {
+    "engines": "inMemory",
+    "dbPath": "./dbMongo",
+    "inMemory": {
+      "engineConfig": {
+        "inMemorySizeGB": "10"
+      }
+    }
+  },
   "keywords": [
     "api",
     "heroku"
@@ -29,6 +38,7 @@
     "express-session": "^1.17.1",
     "jest": "^26.6.3",
     "joi": "^17.4.0",
+    "mongodb-memory-server": "^6.9.6",
     "mongoose": "^5.12.3",
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",

@@ -60,7 +60,7 @@ export class UserValidation{
             email:req.body.username
         }
         const [status, data] = await this.userRepository.fetchUserByEmail(dtoFetchUserByEmail);
-        
+        console.log(status);
         if(status.status === 200){
             return res.status(400).json({success:false, err:"user-already-exist"});
         }
