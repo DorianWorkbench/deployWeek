@@ -7,7 +7,7 @@
     "build": "tsc && cp -r ./src/templateMail ./build/src",
     "start": "node ./build/app.js",
     "serve": "nodemon app.ts",
-    "test": "jest --testTimeout=10000 --force-exit"
+    "test": "jest --testTimeout=10000 --force-exit --detectOpenHandles"
   },
   "storage": {
     "engines": "inMemory",

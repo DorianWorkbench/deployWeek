@@ -19,7 +19,8 @@ describe('USER TEST',()=>{
                 .expect('Content-Type', /json/)
                 .expect(201)
                 .then((response)=>{
-                    expect(response.body.success).toBe(true)
+                    console.log(response.body);
+                    expect(response.body.success).toBe(true);
                 })
             
             await request(app)
@@ -28,6 +29,7 @@ describe('USER TEST',()=>{
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect((response)=>{
+                    console.log(response.body);
                     expect(response.body.success).toBe(true)
                 })
         })
