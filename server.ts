@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import expressSession from "express-session";
 import passport from "passport";
 import {connect} from "./src/bdd/connect";
@@ -12,7 +12,7 @@ import {PizzaRouteFactory} from "./src/routes/pizzaRouteFactory";
 import { PizzaRepository } from "./src/repository/pizzaRepository";
 import { UserValidation } from "./src/validation/userValidation";
 import { PizzaValidation } from "./src/validation/pizzaValidation";
-
+import {Request, Response} from "express";
 require('dotenv').config();
 
 export const app = express();
@@ -35,6 +35,9 @@ export async function serverRun(){
     
     app.use('/user', UserRouteFactory(new UserService(new UserRepository(), new MailUtils()), new UserValidation(new UserRepository())));
     app.use('/pizza', PizzaRouteFactory(new PizzaService(new PizzaRepository()), new PizzaValidation(new PizzaRepository())));
-
+    app.use((err:any, req:Request, res:Response, next:NextFunction)=>{
+        console.log(err);
+        return res.json(err);
+    })
     return app;
 }
