@@ -1,9 +1,17 @@
 import express from "express";
 import expressSession from "express-session";
-import path from "path";
 import passport from "passport";
 import {connect} from "./src/bdd/connect";
 import cors from "cors";
+import { UserRouteFactory } from "./src/routes/userRouteFactory";
+import { UserService } from "./src/services/userService";
+import { UserRepository } from "./src/repository/userRepository";
+import {MailUtils} from "./src/utils/mailer";
+import {PizzaService} from "./src/services/pizzaService";
+import {PizzaRouteFactory} from "./src/routes/pizzaRouteFactory";
+import { PizzaRepository } from "./src/repository/pizzaRepository";
+import { UserValidation } from "./src/validation/userValidation";
+import { PizzaValidation } from "./src/validation/pizzaValidation";
 
 require('dotenv').config();
 
@@ -24,7 +32,9 @@ export async function serverRun(){
     app.use(passport.session());
 
     app.use(express.json());
-    app.listen(process.env.PORT, ()=>{
-        console.log("SERVER ON "+process.env.PORT);
-    });
+    
+    app.use('/user', UserRouteFactory(new UserService(new UserRepository(), new MailUtils()), new UserValidation(new UserRepository())));
+    app.use('/pizza', PizzaRouteFactory(new PizzaService(new PizzaRepository()), new PizzaValidation(new PizzaRepository())));
+
+    return app;
 }

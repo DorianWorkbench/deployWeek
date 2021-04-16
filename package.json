@@ -7,7 +7,16 @@
     "build": "tsc && cp -r ./src/templateMail ./build/src",
     "start": "node ./build/app.js",
     "serve": "nodemon app.ts",
-    "test": "jest"
+    "test": "jest --testTimeout=10000"
+  },
+  "storage": {
+    "engines": "inMemory",
+    "dbPath": "./dbMongo",
+    "inMemory": {
+      "engineConfig": {
+        "inMemorySizeGB": "10"
+      }
+    }
   },
   "keywords": [
     "api",
@@ -20,6 +29,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.22",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -28,12 +38,14 @@
     "express-session": "^1.17.1",
     "jest": "^26.6.3",
     "joi": "^17.4.0",
+    "mongodb-memory-server": "^6.9.6",
     "mongoose": "^5.12.3",
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "supertest": "^6.1.3",
+    "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
     "uuid": "^8.3.2"
@@ -46,6 +58,7 @@
     "@types/nodemailer": "^6.4.1",
     "@types/passport": "^1.0.6",
     "@types/passport-local": "^1.0.33",
+    "@types/supertest": "^2.0.11",
     "@types/uuid": "^8.3.0"
   }
 }
