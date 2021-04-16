@@ -12,6 +12,8 @@ export class UserRepository{
         user.token = dtoAddUser.token;
 
         const result = await user.save().catch((err:mongoose.Error)=>{
+            console.log(err);
+            console.log(err.message);
             return [{status:500}, {success:false, err:err}];
         });
         if(!result){
@@ -23,6 +25,8 @@ export class UserRepository{
 
     async fetchAllUser(){
         const result = await userScheme.find().catch((err:mongoose.Error)=>{
+            console.log(err);
+            console.log(err.message);
             return [{status:500}, {success:false, err:"global-error"}];
         })
         if(!result){
