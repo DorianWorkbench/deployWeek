@@ -9,6 +9,7 @@ export function UserRouteFactory(userService:UserService, userValidation:UserVal
     const userController = new UserController(userService);
 
     router.post('/', (req:Request, res:Response, next:NextFunction)=>{
+        console.log("test 1");
         userValidation.validAddUser(req, res, next)},
         (req:Request, res:Response)=>{
             userController.addUser(req,res)

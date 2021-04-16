@@ -64,7 +64,7 @@ export class UserValidation{
         if(status.status === 200){
             return res.status(400).json({success:false, err:"user-already-exist"});
         }
-
+        console.log(2)
         return next();
     }
 

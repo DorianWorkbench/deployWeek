@@ -6,11 +6,13 @@ export class UserController {
     constructor(private userService:UserService){}
 
     async addUser(req:Request, res:Response){
+        console.log("3")
         let dtoAddUser:DTOaddUser = {
             username:req.body.username,
             password:req.body.password
         };
         const [ status, data ] = await this.userService.addUser(dtoAddUser);
+        console.log("7");
         return res.status(status.status!).json(data);
     }
     async getAllUser(req: Request, res:Response) {

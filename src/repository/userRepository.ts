@@ -19,14 +19,12 @@ export class UserRepository{
         if(!result){
             return [{status:400}, {success:false, err:"create-user-error"}];
         }
-
+        console.log("5");
         return [{status:201}, {success:true, result}];
     }
 
     async fetchAllUser(){
         const result = await userScheme.find().catch((err:mongoose.Error)=>{
-            console.log(err);
-            console.log(err.message);
             return [{status:500}, {success:false, err:"global-error"}];
         })
         if(!result){

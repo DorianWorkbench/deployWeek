@@ -27,6 +27,7 @@ export class UserService{
     constructor(private userRepository:UserRepository, private mail:MailUtils){}
 
     async addUser(dtoAddUser:DTOaddUser){
+        console.log("4");
         let uuid:string = uuidv4();
         let pathN = path.join(__dirname, "../templateMail/verify.ejs");
         let template = ejs.compile(fs.readFileSync(pathN, "utf-8"));
@@ -38,6 +39,7 @@ export class UserService{
         this.mail.sendingMail(dtoAddUser.username, html);
         
         const [status, data] = await this.userRepository.insertUser(dtoAddUser);
+        console.log("6");
         return [{status:status.status}, data];
     }
     
