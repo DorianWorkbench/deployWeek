@@ -1,11 +1,14 @@
 import request from "supertest";
 import {serverRun} from "../server";
 import {Express} from "express"; 
-
+import mongoose from "mongoose";
+import {mongod} from "../src/bdd/connect";
 
 describe('USER TEST',()=>{
     let app:Express;
+    
     beforeAll(async ()=>{app = await serverRun()})
+    afterAll(async ()=>{await mongoose.disconnect(); await mongod.stop()})
 
     describe('USER LOGIN', ()=>{
         it("Should return 200", async ()=>{
@@ -19,7 +22,6 @@ describe('USER TEST',()=>{
                 // .expect('Content-Type', /json/)
                 // .expect(201)
                 .then((response)=>{
-                    console.log(response);
                     expect(response.body.success).toBe(true);
                 })
             await request(app)
