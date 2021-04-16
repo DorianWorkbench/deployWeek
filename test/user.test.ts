@@ -11,29 +11,29 @@ describe('USER TEST',()=>{
     afterAll(async ()=>{await mongoose.disconnect(); await mongod.stop()})
 
     describe('USER LOGIN', ()=>{
-        it("Should return 200", async ()=>{
-            const input = {
-                username:"peyrache.dorian@gmail.com",
-                password:"zerlkdfndkd122"
-            }
-           await request(app)
-                .post('/user')
-                .send(input)
-                // .expect('Content-Type', /json/)
-                // .expect(201)
-                .then((response)=>{
-                    expect(response.body.success).toBe(true);
-                })
-            await request(app)
-                .post('/user/login')
-                .send(input)
-                // .expect('Content-Type', /json/)
-                // .expect(200)
-                .expect((response)=>{
-                    console.log(response.body);
-                    expect(response.body.success).toBe(true)
-                })
-        })
+        // it("Should return 200", async ()=>{
+        //     const input = {
+        //         username:"peyrache.dorian@gmail.com",
+        //         password:"zerlkdfndkd122"
+        //     }
+        //    await request(app)
+        //         .post('/user')
+        //         .send(input)
+        //         // .expect('Content-Type', /json/)
+        //         // .expect(201)
+        //         .then((response)=>{
+        //             expect(response.body.success).toBe(true);
+        //         })
+        //     await request(app)
+        //         .post('/user/login')
+        //         .send(input)
+        //         // .expect('Content-Type', /json/)
+        //         // .expect(200)
+        //         .expect((response)=>{
+        //             console.log(response.body);
+        //             expect(response.body.success).toBe(true)
+        //         })
+        // })
         it("Should return 400 with email-not-set", async ()=>{
             const input = {
                 password:"test1324"
@@ -79,20 +79,20 @@ describe('USER TEST',()=>{
         })
     })
     describe('USER SIGN UP', ()=>{
-        it("should return 200", async ()=>{
-            const input = {
-                username:"peyrache.dorian@gmail.com",
-                password:"zerlkdfndkd122"
-            }
-            await request(app)
-                .post('/user')
-                .send(input)
-                .expect('Content-Type', /json/)
-                .expect(201)
-                .then((response)=>{
-                    expect(response.body.success).toBe(true)
-                })
-        })
+        // it("should return 200", async ()=>{
+        //     const input = {
+        //         username:"peyrache.dorian@gmail.com",
+        //         password:"zerlkdfndkd122"
+        //     }
+        //     await request(app)
+        //         .post('/user')
+        //         .send(input)
+        //         .expect('Content-Type', /json/)
+        //         .expect(201)
+        //         .then((response)=>{
+        //             expect(response.body.success).toBe(true)
+        //         })
+        // })
         it("Should return 400 with email-not-set", async ()=>{
             const input = {
                 password:"test1324"
@@ -153,19 +153,19 @@ describe('USER TEST',()=>{
                 });
         })
 
-        it("should return 200", async ()=>{
-            const input = {
-                username:"peyrache.dorian@gmail.com",
-                password:"zerlkdfndkd122"
-            }
-            await request(app)
-                .post('/user')
-                .send(input)
-                .expect('Content-Type', /json/)
-                .expect(201)
-                .then((response)=>{
-                    expect(response.body.success).toBe(true)
-                })
-        })
+        // it("should return 200", async ()=>{
+        //     const input = {
+        //         username:"peyrache.dorian@gmail.com",
+        //         password:"zerlkdfndkd122"
+        //     }
+        //     await request(app)
+        //         .post('/user')
+        //         .send(input)
+        //         .expect('Content-Type', /json/)
+        //         .expect(201)
+        //         .then((response)=>{
+        //             expect(response.body.success).toBe(true)
+        //         })
+        // })
     })
 })

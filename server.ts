@@ -13,7 +13,14 @@ import { PizzaRepository } from "./src/repository/pizzaRepository";
 import { UserValidation } from "./src/validation/userValidation";
 import { PizzaValidation } from "./src/validation/pizzaValidation";
 import {Request, Response} from "express";
-require('dotenv').config();
+import path from "path";
+
+if(process.env.NODE_ENV === "test"){
+    let pathR = path.join(__dirname, "./.envTest");
+    require('dotenv').config({path:pathR});
+}else{
+    require('dotenv').config();
+}
 
 export const app = express();
 
