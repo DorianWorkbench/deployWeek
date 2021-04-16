@@ -13,16 +13,15 @@ describe('USER TEST',()=>{
                 username:"peyrache.dorian@gmail.com",
                 password:"zerlkdfndkd122"
             }
-            await request(app)
+           await request(app)
                 .post('/user')
                 .send(input)
                 // .expect('Content-Type', /json/)
                 // .expect(201)
                 .then((response)=>{
-                    console.log(response.body);
+                    console.log(response);
                     expect(response.body.success).toBe(true);
                 })
-            
             await request(app)
                 .post('/user/login')
                 .send(input)
